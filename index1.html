@@ -7,24 +7,24 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #121214;
-            color: #e1e1e6;
+            background-color: #addbcc;
+            color: #000000;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         .card {
-            background-color: #1f1f23;
-            border: 1px solid #323238;
+            background-color: #ffffff;
+            border: 1px solid #000000;
         }
         .form-control, .form-select {
-            background-color: #2a2a2e;
-            border: 1px solid #323238;
-            color: #fff;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            color: #000000;
         }
         .form-control:focus, .form-select:focus {
-            background-color: #2a2a2e;
-            color: #fff;
+            background-color: #ffffff;
+            color: #000000;
             border-color: #4CAF50;
-            box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.25);
+            box-shadow: 0 0 0 0.25rem rgba(97, 195, 100, 0.25);
         }
         .btn-success {
             background-color: #4CAF50;
@@ -34,12 +34,12 @@
             background-color: #45a049;
         }
         #resultado {
-            background-color: #2a2a2e;
+            background-color: #ffffff;
             border-left: 5px solid #4CAF50;
             padding: 15px;
             border-radius: 5px;
             margin-top: 20px;
-            color: #fff;
+            color: #000000;
             white-space: pre-wrap;
         }
     </style>
@@ -52,8 +52,8 @@
             <div class="mb-3">
                 <label for="modelo" class="form-label">Selecciona el modelo:</label>
                 <select id="modelo" class="form-select">
-                    <option value="gemini-2.5-flash">gemini-2.5-flash</option>
-                    <option value="llama-3.3-70b-versatile">llama-3.3-70b-versatile</option>
+                    <option value="gemini-2.5-flash">gemini-2.5-flash [ARCHIVOS/FOTOS]</option>
+                    <option value="llama-3.3-70b-versatile">llama-3.3-70b-versatile [TEXTO]</option>
                 </select>
             </div>
 
@@ -90,8 +90,7 @@
     </div>
 
     <script>
-        const API_URL = "https://web-production-6fb47.up.railway.app/api/sumarize";
-
+    const API_URL = "https://web-production-6fb47.up.railway.app/api";
         function toggleArchivo() {
             const contenedor = document.getElementById('archivoContainer');
             const label = document.getElementById('labelArchivo');

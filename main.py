@@ -8,16 +8,15 @@ import asyncio
 from dotenv import load_dotenv
 from groq import Groq
 
-# Cargar variables de entorno
 load_dotenv()
 
 app = FastAPI(
-    title="Asistente Inteligente Multimodal",
-    description="API que procesa texto e interactúa con archivos de forma independiente.",
-    version="4.1.0"
+    title="API Multimodal Estable",
+    description="API que separa el procesamiento de texto y el análisis de archivos.",
+    version="3.4.0"
 )
 
-# Habilitar CORS para permitir peticiones desde el frontend en la nube
+# Habilitar CORS para permitir peticiones desde cualquier origen
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -67,7 +66,7 @@ async def consultar_texto(prompt: str = Form(...), modelo: str = Form(...)):
             "respuesta": respuesta_texto
         }
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error en servidor de texto: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error Revise el texto este bien escrito: {str(e)}")
 
 @app.post("/api/consultar-multimodal")
 async def consultar_multimodal(
@@ -202,7 +201,7 @@ async def home():
         </div>
 
         <script>
-            // Detecta dinámicamente si estás en Railway o en Localhost
+            // Ruta completa apuntando al backend
             const API_URL = window.location.origin + "/api";
 
             function toggleArchivo() {
