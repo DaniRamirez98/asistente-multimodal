@@ -1,6 +1,7 @@
 import os
 from fastapi import FastAPI, HTTPException, UploadFile, File, Form
 from fastapi.responses import HTMLResponse
+from fastapi.middleware.cors import CORSMiddleware
 from google import genai
 from google.genai import types
 import asyncio
@@ -13,7 +14,16 @@ load_dotenv()
 app = FastAPI(
     title="Asistente Inteligente Multimodal",
     description="API que procesa texto e interactúa con archivos de forma independiente.",
-    version="4.0.0"
+    version="4.1.0"
+)
+
+# Habilitar CORS para permitir peticiones desde el frontend en la nube
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Inicializar clientes
@@ -96,7 +106,7 @@ async def consultar_multimodal(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error en servidor de archivos: {str(e)}")
 
-# Interfaz HTML integrada dentro de la misma API
+
 @app.get("/", response_class=HTMLResponse)
 async def home():
     return """
@@ -192,7 +202,8 @@ async def home():
         </div>
 
         <script>
-            const API_URL = "http://127.0.0.1:8000/api";
+            // Detecta dinámicamente si estás en Railway o en Localhost
+            const API_URL = window.location.origin + "/api";
 
             function toggleArchivo() {
                 const contenedor = document.getElementById('archivoContainer');
@@ -249,7 +260,7 @@ async def home():
                         resultadoDiv.innerText = "Error: " + (data.detail || JSON.stringify(data));
                     }
                 } catch (error) {
-                    resultadoDiv.innerText = "Error al conectar con la API (Verifica que el puerto 8000 esté abierto). Detalles: " + error.message;
+                    resultadoDiv.innerText = "Error al conectar con la API. Detalles: " + error.message;
                 }
             }
         </script>
